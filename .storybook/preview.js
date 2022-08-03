@@ -1,7 +1,8 @@
 import * as NextImage from "next/image";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider, Global } from "@emotion/react";
 
 import { Themes } from '../styles/themes';
+import { GlobalStyles } from '../styles/global';
 
 const OriginalNextImage = NextImage.default;
 
@@ -17,12 +18,19 @@ const withThemeProvider = (Story, context) => {
   
   return (
     <ThemeProvider theme={theme}>
-    <Story {...context} />
+    <Story { ...context}/>
     </ThemeProvider>
   );
 };
 
-export const decorators = [withThemeProvider];
+const withGlobalStyles = (Story, context) => (
+  <>
+    <Global styles={GlobalStyles} />
+    <Story {...context} />
+  </>
+)
+
+export const decorators = [withThemeProvider, withGlobalStyles];
 
 
 
