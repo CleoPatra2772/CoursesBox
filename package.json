@@ -9,7 +9,8 @@
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook ",
-    "test": "jest"
+    "test": "jest",
+    "chromatic": "npx chromatic --project-token=3979ac42a082"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -46,5 +47,7 @@
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "4.7.4",
     "webpack": "^5.74.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "coursesbox@0.1.0"
 }
