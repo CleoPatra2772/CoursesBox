@@ -18,7 +18,6 @@ describe("Button test cases", ()=> {
         
         render(<Button onClick={onClick}>Button</Button>);
 
-        screen.debug();
 
         const element = screen.getByRole("button");
 
