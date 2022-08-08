@@ -17,6 +17,7 @@ ${({theme}) => boxShadow(theme.components.shadow1, theme.components.shadow2)};
 `;
 
 interface Props{
+    // Header String
     header: string;
     children: React.ReactNode;
 };

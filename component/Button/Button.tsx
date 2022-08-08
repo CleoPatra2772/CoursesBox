@@ -3,12 +3,16 @@ import styled from "@emotion/styled";
 import { css, SerializedStyles } from "@emotion/react";
 import { AppTheme } from "@/styles/themes";
 import { boxShadow, transition, borderRadius } from "../styles";
+import { FC } from "react";
 
 export type Color = "primary"|"secondary"|"danger"|"warning";
 
 export type Props = {
+    //Text in the button
     children: string;
+    //Button color
     color?: Color;
+    //Click Handler
     onClick: (event: MouseEvent<HTMLButtonElement> ) => void;
 };
 
@@ -51,3 +55,21 @@ ${({theme}) => boxShadow(theme.components.shadow1, theme.components.shadow2)}
 Button.defaultProps = {
     color: "primary",
 };
+
+type DefinedButton = Omit<Props, "color">;
+
+export const PrimaryButton: FC<DefinedButton> = (props) => (
+  <Button color="primary" {...props} />
+);
+
+export const SecondaryButton: FC<DefinedButton> = (props) => (
+  <Button color="secondary" {...props} />
+);
+
+export const DangerButton: FC<DefinedButton> = (props) => (
+  <Button color="danger" {...props} />
+);
+
+export const WarningButton: FC<DefinedButton> = (props) => (
+  <Button color="warning" {...props} />
+);

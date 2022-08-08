@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+ import { render, screen } from "@/test-utils";
 import { Tile } from "./Tile";
 
 describe("Tile test cases", () => {
