@@ -2,11 +2,13 @@ import { useRef, FC, ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 import { boxShadow, transition } from '../styles';
 import { useId } from '@/component/hooks/useId';
+
+
 const Wrapper = styled.label`
-&input{
+& input{
     display: none;
 }
-&input: checked{
+& input: checked{
     & ~label {
         background: ${({ theme }) => theme.components.primary};
         &::after{
