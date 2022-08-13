@@ -3,13 +3,13 @@
 exports[`Icon test cases Icon render check 1`] = `
 <DocumentFragment>
   <div
-    class="css-btrufr"
+    class="css-1alw6wc"
   >
     <svg
       fill="currentColor"
-      height="2.5rem"
+      height="2.5remrem"
       viewBox="0 0 24 24"
-      width="2.5rem"
+      width="2.5remrem"
     >
       <path
         d="M0 0h24v24H0z"
