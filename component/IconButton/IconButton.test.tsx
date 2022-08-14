@@ -15,7 +15,7 @@ describe("IconButton test cases", () => {
 
     expect(asFragment()).toMatchSnapshot();
   });
-  it("Check onClick callback", () => {
+  it("Check onClick callback", async () => {
     const onClick = jest.fn();
 
     render(
@@ -26,7 +26,7 @@ describe("IconButton test cases", () => {
 
     const element = screen.getByRole("button");
 
-    userEvent.click(element);
+    await userEvent.click(element);
 
     expect(onClick).toHaveBeenCalled();
   });

@@ -29,7 +29,7 @@ describe("Input test cases", () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
-  it("Check onChange callback", () => {
+  it("Check onChange callback", async () => {
     const onChange = jest.fn();
     render(
       <Input
@@ -39,7 +39,7 @@ describe("Input test cases", () => {
       />
     );
     const element = screen.getByRole("textbox");
-    userEvent.type(element, "String");
+    await userEvent.type(element, "String");
     expect(onChange).toHaveBeenCalledTimes(6);
   });
 });
