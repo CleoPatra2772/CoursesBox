@@ -3,7 +3,9 @@
 exports[`Input test cases Render check 1`] = `
 <DocumentFragment>
   <label
-    class="css-1v3jg1t"
+    class="css-1qg2j3y"
+    height="7"
+    width="20"
   >
     <span
       class="css-3rj7bz"
@@ -11,13 +13,11 @@ exports[`Input test cases Render check 1`] = `
       Label
     </span>
     <div
-      class="css-z6y2hm"
+      class="css-51coty"
     >
       <input
-        class="css-96ypjm"
-        height="4"
+        class="css-1ma8s4p"
         placeholder="Placeholder"
-        width="20"
       />
     </div>
   </label>
@@ -27,7 +27,9 @@ exports[`Input test cases Render check 1`] = `
 exports[`Input test cases Render check with icon 1`] = `
 <DocumentFragment>
   <label
-    class="css-1v3jg1t"
+    class="css-1qg2j3y"
+    height="7"
+    width="20"
   >
     <span
       class="css-3rj7bz"
@@ -35,18 +37,16 @@ exports[`Input test cases Render check with icon 1`] = `
       Label
     </span>
     <div
-      class="css-z6y2hm"
+      class="css-51coty"
     >
       <input
-        class="css-96ypjm"
-        height="4"
+        class="css-1ma8s4p"
         placeholder="Placeholder"
-        width="20"
       />
       <svg
         aria-hidden="true"
         aria-label="Search"
-        class="css-4d812o"
+        class="css-1td76u9"
         data-icon="search"
         fill="currentColor"
         focusable="false"
