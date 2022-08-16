@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { Logo } from "../Logo/Logo";
 import { Input} from "../Input/Input";
 import { IconButton } from "../IconButton";
+import { StyledLink } from "../StyledLink";
 
 const Wrapper = styled.div`
 display: grid;
@@ -57,13 +58,13 @@ height: 4rem;
 }
 `;
 
-const LogoLink = styled.a`
-all: unset;
-cursor: pointer;
-&:hover {
-    opacity: 0.6;
-}
-`;
+// const LogoLink = styled.a`
+// all: unset;
+// cursor: pointer;
+// &:hover {
+//     opacity: 0.6;
+// }
+// `;
 
 const MainNav = styled.nav`
 grid-area: nav;
@@ -111,9 +112,9 @@ interface Props {
     <Wrapper>
        
         <Link href="/" passHref >
-        <LogoLink>
+        <StyledLink>
         <StyledLogo size={3}>C8X</StyledLogo>
-        </LogoLink>
+        </StyledLink>
         </Link>
         <MainNav>
             <Link href="/all">All</Link>

@@ -61,7 +61,7 @@ display: flex;
 position: relative;
 align-items: center;
 width: 100%;
-heigth: 100%;
+height: 100%;
 `
 
 const Text = styled.span`
@@ -85,8 +85,8 @@ export type Props = {
 
 export const Input: FC<Props & InputHTMLAttributes<HTMLInputElement>> = ({
   label,
-  height = 7,
-  width = 10,
+  height = 4,
+  width = 20,
   icon,
   feedback,
   className,
