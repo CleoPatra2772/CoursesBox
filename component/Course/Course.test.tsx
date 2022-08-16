@@ -9,7 +9,7 @@ describe("Course test cases", () => {
             header="Hands-On React. Build advanced React JS Frontend with expert"
             link="/hands-on-reactjs"
             imageProps ={{
-                width: 2368,
+                width: 1368,
                 height: 770,
                 alt: "Logo for Hands-On React",
                 src: "/hands-on_reactjs_cover.png",
