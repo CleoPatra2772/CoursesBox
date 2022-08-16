@@ -86,7 +86,7 @@ export type Props = {
 export const Input: FC<Props & InputHTMLAttributes<HTMLInputElement>> = ({
   label,
   height = 7,
-  width = 20,
+  width = 10,
   icon,
   feedback,
   className,

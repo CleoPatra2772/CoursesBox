@@ -44,7 +44,6 @@ nav {
 nav {
     
     flex-direction: row;
-    justify-content: space-around;
 }
 `;
 
@@ -102,9 +101,12 @@ heigth: 5rem;
 
 interface Props {
     children: React.ReactNode;
+    isDark: boolean;
+    onThemeToggle: () => void;
 }
 
-export const Layout: FC<Props> = ({ children }) => {
+
+ export const Layout: FC<Props> = ({ children, isDark, onThemeToggle }) => {
     return (
     <Wrapper>
        
@@ -116,7 +118,8 @@ export const Layout: FC<Props> = ({ children }) => {
         <MainNav>
             <Link href="/all">All</Link>
             <Link href="/news">News</Link>
-            <IconButton name="Moon" size={1} onClick={() => null} />
+            
+        <IconButton name={isDark ? "Moon" : "Sun"} size={1} onClick={onThemeToggle} />
         </MainNav>
         <SearchInput icon="Search" placeholder="Search" onChange= {() => null} />
         <Content>{children}</Content>

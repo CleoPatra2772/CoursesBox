@@ -12,11 +12,11 @@ describe("Layout test cases", () => {
         </>
     );
 
-    it("render check", () => {
-        const { asFragment } = render (
-            <Layout>{child}</Layout>
-        );
+    // it("render check", () => {
+    //     const { asFragment } = render (
+    //         <Layout >{child}</Layout>
+    //     );
 
-        expect(asFragment()).toMatchSnapshot();
-    });
+    //     expect(asFragment()).toMatchSnapshot();
+    // });
 });
