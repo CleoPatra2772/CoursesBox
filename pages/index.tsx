@@ -19,8 +19,9 @@ const Home: NextPage = () => {
     <link rel="icon" href="/favicon.ico" />
   </Head>
   <CoursesWrapper>
-  {Array(4).fill(
+  {Array(4).fill("").map(() => (
     <Course
+    key={Math.random()}
     header="Hands-On React. Build advanced React JS Frontend with expert"
     link="/hands-on-reactjs"
     imageProps ={{
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
     </ul>
     </>
     </Course>
-  )}
+  ))}
   </CoursesWrapper>
    </>
 

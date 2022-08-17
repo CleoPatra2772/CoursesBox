@@ -77,13 +77,7 @@ display: flex;
 justify-content: space-around;
 align-items: center;
 margin: 0 2vmin;
-a {
-    cursor: pointer;
-    color: ${({ theme }) => theme.font.regular};
-    &:hover {
-        opacity: 0.7;
-    }
-}
+
 
 `;
 
@@ -125,8 +119,12 @@ interface Props {
         </LogoLink>
         </Link>
         <MainNav>
-            <Link href="/all">All</Link>
-            <Link href="/news">News</Link>
+            <Link href="/all" passHref>
+                <StyledLink>All</StyledLink>
+            </Link>
+            <Link href="/news" passHref>
+                <StyledLink>News</StyledLink>
+                </Link>
             
         <IconButton name={isDark ? "Moon" : "Sun"} size={1} onClick={onThemeToggle} />
         </MainNav>
