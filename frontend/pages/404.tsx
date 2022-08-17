@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Logo } from "@/component/Logo";
+import { Logo } from "../component/Logo";
 import styled from "@emotion/styled";
-import { StyledLink } from "@/component/StyledLink";
+import { StyledLink } from "../component/StyledLink";
 
 
 const Wrapper = styled.div`
