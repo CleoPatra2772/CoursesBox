@@ -8,6 +8,7 @@ const CommonStyles = css`
 display: flex;
 justify-content: center;
 align-items: center;
+
 `;
 
 const Wrapper = styled.div`
@@ -20,10 +21,11 @@ ${CommonStyles};
 const StyledTile = styled(Tile)`
 ${CommonStyles};
 flex-flow: column;
+
 `;
 
 export const CenteredTile: FC<Props> = ({ children, header, ...rest }) => (
     <Wrapper {...rest}>
-        <StyledTile header={header}>{children}</StyledTile>
+        <StyledTile header={header}> {children} </StyledTile>
     </Wrapper>
 );

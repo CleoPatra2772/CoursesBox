@@ -6,6 +6,52 @@ import { boxShadow } from '../styles';
 import { useId } from '../../component/hooks/useId';
 import { AvailableIcons, Icon } from '../Icon';
 
+type WrapperProps ={
+  height?: number;
+  width?: number;
+  isLabelVisible?: boolean;
+  isFeedbackVisible?: boolean;
+};
+
+
+const Wrapper = styled.label<WrapperProps>`
+display: grid;
+  gap: 0.1rem;
+  grid-template-areas: 
+  "label"
+  "input"
+  "feedback";
+  grid-template-rows: ${({ isLabelVisible, isFeedbackVisible}) =>{ 
+
+  if(isLabelVisible && isFeedbackVisible) {
+  return "1fr 3fr 1fr";
+}else if (isLabelVisible) {
+  return "1fr 4fr 0fr";
+}else if (isFeedbackVisible){
+  return "0fr 4fr 1fr";
+}else {
+  return "0fr 1fr 0fr";
+}
+
+
+}};
+
+  width: ${({ width }) => width}rem;
+  height: ${({ height }) => height}rem;
+  color: ${({ theme }) => theme.font.regular};
+  font-size: 1rem;
+  
+`;
+
+const InputWrapper = styled.div`
+grid-area: input;
+display: flex;
+position: relative;
+align-items: center;
+width: 100%;
+height: 100%;
+`;
+
 
 
 const StyledInput = styled.input`
@@ -31,22 +77,7 @@ const StyledInput = styled.input`
   }
 `;
 
-type LabelProps ={
-  height?: number;
-  width?: number;
-};
 
-
-const Label = styled.label<LabelProps>`
-display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  width: ${({ width }) => width}rem;
-  height: ${({ height }) => height}rem;
-  color: ${({ theme }) => theme.font.regular};
-  font-size: 1rem;
-  
-`;
 
 const StyledIcon = styled(Icon)`
  
@@ -56,17 +87,20 @@ const StyledIcon = styled(Icon)`
   opacity: 0.7;
 `;
 
-const InputWrapper = styled.div`
-display: flex;
-position: relative;
-align-items: center;
-width: 100%;
-height: 100%;
-`
 
-const Text = styled.span`
+
+// const Text = styled.span`
+// padding-left: 1.4rem;
+// `
+
+const Label = styled.span`
+grid-area: label;
 padding-left: 1.4rem;
-`
+`;
+
+const Feedback = styled(Label)`
+grid-area: feedback;
+`;
 
 export type Props = {
   /** Input label */
@@ -81,7 +115,7 @@ export type Props = {
   feedback?: ReactNode;
   // height?: number;
   // width?: number;
-} & LabelProps;
+} & WrapperProps;
 
 export const Input: FC<Props & InputHTMLAttributes<HTMLInputElement>> = ({
   label,
@@ -90,18 +124,23 @@ export const Input: FC<Props & InputHTMLAttributes<HTMLInputElement>> = ({
   icon,
   feedback,
   className,
-  ...props
+  ...rest
 }) => (
-  <Label height={height} width={width} className={className}>
-     <Text>{label}</Text>
+  <Wrapper 
+  isLabelVisible={Boolean(label)}
+  isFeedbackVisible={Boolean(feedback)}
+  height={height} 
+  width={width} 
+  className={className}>
+     <Label>{label}</Label>
     <InputWrapper>
     <StyledInput 
-     {...props} />
+     {...rest} />
     {icon && <StyledIcon name={icon} />}
     </InputWrapper>
-    <Text>{feedback}</Text>
+    <Feedback>{feedback}</Feedback>
     
-  </Label>
+  </Wrapper>
 );
 
 

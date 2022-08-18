@@ -23,8 +23,8 @@ export interface Props{
 };
 
 
-export const Tile: FC<Props> = ({ header, children }) => (
-<Section>
+export const Tile: FC<Props> = ({ header, children, ...rest }) => (
+<Section {...rest}>
     <h2>{header}</h2>
     {children}
     </Section>
