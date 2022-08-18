@@ -14,8 +14,8 @@ exports[`Login page render check 1`] = `
         </h2>
          
         <label
-          class="css-147si7s"
-          height="6"
+          class="css-1xs7g1t"
+          height="8"
           width="20"
         >
           <span
@@ -28,16 +28,21 @@ exports[`Login page render check 1`] = `
           >
             <input
               class="css-1ma8s4p"
+              name="identifier"
               placeholder="username or email"
+              role="textbox"
             />
           </div>
           <span
             class="css-8t7t1n"
-          />
+            role="alert"
+          >
+             
+          </span>
         </label>
         <label
-          class="css-147si7s"
-          height="6"
+          class="css-1xs7g1t"
+          height="8"
           width="20"
         >
           <span
@@ -50,13 +55,18 @@ exports[`Login page render check 1`] = `
           >
             <input
               class="css-1ma8s4p"
+              name="password"
               placeholder="password"
+              role="textbox"
               type="password"
             />
           </div>
           <span
             class="css-8t7t1n"
-          />
+            role="alert"
+          >
+             
+          </span>
         </label>
         <button
           class="css-tjwez1"

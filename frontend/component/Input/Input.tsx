@@ -135,7 +135,7 @@ forwardRef(
      {...rest} />
     {icon && <StyledIcon name={icon} />}
     </InputWrapper>
-    <Feedback>{feedback}</Feedback>
+    <Feedback role="alert">{feedback}</Feedback>
     
   </Wrapper>
 ));

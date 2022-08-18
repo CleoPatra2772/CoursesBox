@@ -64,8 +64,8 @@ exports[`Layout test cases render check 1`] = `
       </button>
     </nav>
     <label
-      class="css-1hba8f5"
-      height="4"
+      class="css-sw8e4"
+      height="7"
       width="20"
     >
       <span
@@ -97,6 +97,7 @@ exports[`Layout test cases render check 1`] = `
       </div>
       <span
         class="css-8t7t1n"
+        role="alert"
       />
     </label>
     <main
