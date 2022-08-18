@@ -1,7 +1,7 @@
 import { useRef, FC, ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 import { boxShadow, transition } from '../styles';
-import { useId } from '@/frontend/component/hooks/useId';
+import { useId } from '../hooks/useId';
 
 
 const Wrapper = styled.label`

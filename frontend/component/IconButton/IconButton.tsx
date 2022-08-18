@@ -1,4 +1,4 @@
-import { FC, MouseEvent} from 'react';
+import { forwardRef, ForwardedRef, FC, MouseEvent} from 'react';
 import styled from '@emotion/styled';
 import { boxShadow, transition } from '../styles';
 import { Icon, Props as IconProps} from '../Icon';
@@ -40,12 +40,19 @@ boxShadow(theme.components.shadow1, theme.components.shadow2, true)}
 
 export type Props = {
     // onCLick callback
-    onClick:(event: MouseEvent<HTMLButtonElement> ) => void;
-} & IconProps;
+    onClick?:(event: MouseEvent<HTMLButtonElement> ) => void;
+} & Omit<IconProps, "ref">;
 
-export const IconButton: FC<Props> = ({ onClick, ...props }) => (
-    <Button onClick={onClick} 
-    size={`${(props.size || 2) * 2}rem`}
-    title={props.name}
-    ><Icon { ...props}/></Button>
-)
+
+export const IconButton: FC<Props> = forwardRef(
+  ({ onClick, ...props }, ref) => (
+    <Button
+      onClick={onClick}
+      size={`${(props.size || 2) * 2}rem`}
+      title={props.name}
+      ref={ref as ForwardedRef<HTMLButtonElement>}
+    >
+      <Icon {...props} />
+    </Button>
+  )
+);

@@ -3,22 +3,28 @@ import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@emotion/react';
 import { Themes } from "@/styles/themes";
-import { Layout } from "@/frontend/component/Layout";
+import { Layout } from "../component/Layout";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isDark, setIsDark] = useState(false);
-  const toggleDark = () => setIsDark(!isDark);
-  useEffect(()=>{
-    setIsDark(window.matchMedia("prefers-color-scheme: dark").matches);
-  },[]);
-  const theme = Themes[isDark ? "dark" : "light"];
+  // const [isDark, setIsDark] = useState(false);
+  // const toggleDark = () => {
+  //   localStorage.setItem("theme", isDark? "light" : "dark")
+  //   setIsDark(!isDark)};
+
+  // useEffect(()=>{
+  //   const isDark = Boolean(localStorage.getItem("theme") === "dark");
+
+  //   setIsDark(window.matchMedia("prefers-color-scheme: dark").matches || isDark);
+  // },[]);
+
+
   return (
-    <ThemeProvider theme={theme}>
-  <Layout isDark ={isDark} onThemeToggle={toggleDark}>
+    
+  <Layout >
     <Component {...pageProps} />
     </Layout>
-    </ThemeProvider>
+  
     )
 
 }

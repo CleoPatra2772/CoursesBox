@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { CenteredTile } from "../component/Tile";
 import { Input} from "@/component/Input";
-import { Feedback } from "@/component/Input/Feedback";
+import { ConditionalFeedback } from "@/component/Input/Feedback";
 import { Button } from "@/component/Button";
 import { StyledLink } from "@/component/StyledLink";
 
@@ -29,13 +29,16 @@ const Login: NextPage = () => {
     return (
    
     <form onSubmit={handleSubmit(onSubmit)}>
-         <CenteredTile header="Login">
+         <CenteredTile header="login">
         <StyledInput 
         label="Identifier" 
         placeholder="username or email"
         role="textbox"
-        feedback = {
-            errors.identifier ? <Feedback>{errors.identifier?.message}</Feedback> : <>&nbsp;</>}
+        feedback = { 
+        <ConditionalFeedback>
+            {errors.identifier?.message}
+        </ConditionalFeedback>
+        }   
         height={8}
         {...register("identifier", {
             required: "Required field!",
@@ -48,7 +51,10 @@ const Login: NextPage = () => {
         placeholder="password"
         role="textbox"
         feedback = {
-            errors.password ? <Feedback>{errors.password?.message}</Feedback> : <>&nbsp;</>}
+            <ConditionalFeedback>
+            {errors.password?.message}
+        </ConditionalFeedback>
+            }
         height={8} 
         {...register("password", {
             required: "Required field!",

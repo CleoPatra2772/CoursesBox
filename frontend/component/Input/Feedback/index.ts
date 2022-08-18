@@ -1,2 +1,2 @@
-export { Feedback } from "./Feedback";
+export { Feedback, ConditionalFeedback } from "./Feedback";
 

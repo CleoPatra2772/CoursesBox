@@ -98,4 +98,4 @@ const User = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
   );
   
-  export const Icons = { User, Moon, Sun, Home, Settings, Search};
+  export const Icons = { User, Moon, Sun, Home, Settings, Search, Login};

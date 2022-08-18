@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useLayoutEffect, useEffect } from "react";
 import Link from "next/link";
 import styled from '@emotion/styled';
 
@@ -7,107 +7,57 @@ import { Logo } from "../Logo/Logo";
 import { Input} from "../Input/Input";
 import { IconButton } from "../IconButton";
 import { StyledLink } from "../StyledLink";
-
-const Wrapper = styled.div`
-display: grid;
-gap: 0.1rem;
-color: ${({ theme }) => theme.font.regular};
-background-color: ${({ theme }) => theme.background};
-padding: 0.5rem;
-grid-template-areas:
-"header  nav"
-"search  search"
-"content content"
-"footer  footer";
-nav{
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 5vmin;
-}
-
-@media (min-width: 500px) {
-    grid-template-columns: 1fr 3fr;
-}
-
-@media (min-width: 960px) {
-    grid-template-columns: 1fr 4fr 2fr;
-    grid-template-areas: 
-    "header  search  nav"
-    "content content content"
-    "footer  footer  footer";
-}
-`;
-
-const LogoLink = styled(StyledLink) `
-padding-right: 1vw;
-`;
-
-const StyledLogo = styled(Logo)`
-grid-area: header;
-display: flex;
-align-items: center;
-justify-content: flex-start;
-height: 4rem;
-& .logo_full {
-    display: none;
-}
-@media(min-width: 560px) {
-    & .logo_short {
-        display: none;
-    }
-    & .logo_full {
-        display: inline;
-    }
-}
+import { ThemeProvider } from "@emotion/react";
+import { Themes } from "@/styles/themes";
 
 
-`;
-
-// const LogoLink = styled.a`
-// all: unset;
-// cursor: pointer;
-// &:hover {
-//     opacity: 0.6;
-// }
-// `;
-
-const MainNav = styled.nav`
-grid-area: nav;
-display: flex;
-justify-content: space-around;
-align-items: center;
-margin: 0 2vmin;
-
-
-`;
-
-const SearchInput = styled(Input) `
-grid-area: search;
-width: 100%;
-heigth: 4rem;
-`;
-
-const Content = styled.main`
-grid-area: content`;
-
-const Footer = styled.footer`
-grid-area: footer;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-around;
-heigth: 5rem;
-`;
+import {
+    Wrapper,
+    LogoLink,
+    StyledLogo,
+    MainNav,
+    SearchInput,
+    Content,
+    Footer,
+} from "./components";
 
 interface Props {
     children: React.ReactNode;
-    isDark: boolean;
-    onThemeToggle: () => void;
+   // isDark: boolean;
+   // onThemeToggle: () => void;
 }
 
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
- export const Layout: FC<Props> = ({ children, isDark, onThemeToggle }) => {
+ export const Layout: FC<Props> = ({ children }) => {
+    const [isDark, setIsDark ] = useState(true);
+
+    const toggleDark = () => {
+        localStorage.setItem("theme", isDark? "light" : "dark");
+        setIsDark(!isDark);
+    }
+
+    useIsomorphicLayoutEffect(() => {
+        const theme = localStorage.getItem("theme");
+        const themeExistsInStorage = Boolean(theme !== null);
+
+        setIsDark(
+            themeExistsInStorage 
+            ? Boolean(theme === "dark")
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+        );
+        // const isDark =
+        //   Boolean(localStorage.getItem("theme") === "dark") ||
+        //   window.matchMedia("prefers-color-scheme: dark").matches;
+        //   setIsDark(isDark);
+        }, []);
+
+
+   const theme = Themes[isDark ? "dark" : "light"];
+    
     return (
+        <ThemeProvider theme={theme}>
     <Wrapper>
        
         <Link href="/" passHref >
@@ -122,11 +72,11 @@ interface Props {
             <Link href="/all" passHref>
                 <StyledLink>All</StyledLink>
             </Link>
-            <Link href="/news" passHref>
-                <StyledLink>News</StyledLink>
+            <Link href="/login" passHref>
+                <IconButton name="Login" size={1}/>
                 </Link>
             
-        <IconButton name={isDark ? "Moon" : "Sun"} size={1} onClick={onThemeToggle} />
+        <IconButton name={!isDark ? "Moon" : "Sun"} size={1} onClick={toggleDark} />
         </MainNav>
         <SearchInput icon="Search" placeholder="Search" onChange= {() => null} />
         <Content>{children}</Content>
@@ -134,5 +84,6 @@ interface Props {
         © {new Date().getFullYear()} CleoGao. All rights reserved.
         </Footer>
     </Wrapper>
+    </ThemeProvider>
     )
 }

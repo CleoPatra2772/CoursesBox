@@ -10,7 +10,7 @@ exports[`Login page render check 1`] = `
         class="css-1fluu6k"
       >
         <h2>
-          Login
+          login
         </h2>
          
         <label
