@@ -3,23 +3,26 @@
 exports[`Input test cases Render check 1`] = `
 <DocumentFragment>
   <label
-    class="css-u8d4bn"
+    class="css-1eu5azg"
     height="4"
     width="20"
   >
     <span
-      class="css-3rj7bz"
+      class="css-6hin7w"
     >
       Label
     </span>
     <div
-      class="css-5r0opj"
+      class="css-qqgi3g"
     >
       <input
         class="css-1ma8s4p"
         placeholder="Placeholder"
       />
     </div>
+    <span
+      class="css-8t7t1n"
+    />
   </label>
 </DocumentFragment>
 `;
@@ -27,17 +30,17 @@ exports[`Input test cases Render check 1`] = `
 exports[`Input test cases Render check with icon 1`] = `
 <DocumentFragment>
   <label
-    class="css-u8d4bn"
+    class="css-1eu5azg"
     height="4"
     width="20"
   >
     <span
-      class="css-3rj7bz"
+      class="css-6hin7w"
     >
       Label
     </span>
     <div
-      class="css-5r0opj"
+      class="css-qqgi3g"
     >
       <input
         class="css-1ma8s4p"
@@ -60,6 +63,9 @@ exports[`Input test cases Render check with icon 1`] = `
         />
       </svg>
     </div>
+    <span
+      class="css-8t7t1n"
+    />
   </label>
 </DocumentFragment>
 `;

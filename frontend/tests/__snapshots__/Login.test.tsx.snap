@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login page render check 1`] = `
+<div>
+  <form>
+    <div
+      class="css-1owwovu"
+    >
+      <section
+        class="css-1fluu6k"
+      >
+        <h2>
+          Login
+        </h2>
+         
+        <label
+          class="css-147si7s"
+          height="6"
+          width="20"
+        >
+          <span
+            class="css-6hin7w"
+          >
+            Identifier
+          </span>
+          <div
+            class="css-qqgi3g"
+          >
+            <input
+              class="css-1ma8s4p"
+              placeholder="username or email"
+            />
+          </div>
+          <span
+            class="css-8t7t1n"
+          />
+        </label>
+        <label
+          class="css-147si7s"
+          height="6"
+          width="20"
+        >
+          <span
+            class="css-6hin7w"
+          >
+            Password
+          </span>
+          <div
+            class="css-qqgi3g"
+          >
+            <input
+              class="css-1ma8s4p"
+              placeholder="password"
+              type="password"
+            />
+          </div>
+          <span
+            class="css-8t7t1n"
+          />
+        </label>
+        <button
+          class="css-tjwez1"
+          color="primary"
+          type="submit"
+        >
+          Sign In
+        </button>
+        <h3>
+          <a
+            class="css-1ixycxi"
+            href="/registration"
+          >
+            Create account
+          </a>
+        </h3>
+         
+      </section>
+    </div>
+  </form>
+</div>
+`;
