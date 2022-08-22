@@ -13,9 +13,9 @@ describe("Layout test cases", () => {
         </>
     );
 
-    it("Theme toggle check", async () => {
-        localStorage.setItem("theme", "light");
-        (window.matchMedia as jest.Mock).mockReturnValue({ matches: true });
+        it("Theme toggle check", async () => {
+          localStorage.setItem("theme", "light");
+          (window.matchMedia as jest.Mock).mockReturnValue({ matches: true });
     
         render(<Layout>{child}</Layout>);
     
