@@ -1,180 +1,76 @@
-import { mockUser } from '@/mocks/user';
-import { reducer, actions, initialState, login } from './userSlice';
+import { reducer, actions, initialState, login } from "./userSlice";
+import { storeCreator } from "@/store";
+import { mockUser, ValidationError } from "@/mocks/user";
 
-const updatedState ={
+const updatedState = {
     jwt: mockUser.jwt,
     username: mockUser.user.username,
     email: mockUser.user.email,
-}
+  };
 
-const loginData = {
+  const loginData = {
     identifier: mockUser.user.email,
     password: mockUser.user.password,
-};
+  };
+  
 
-const requestId = 'someid';
-
-describe("User slice check", () => {
-    describe("Update state actions", () => {
-        it("should update the full state", () => {
-            expect(reducer(initialState, actions.update(updatedState))). toEqual(
-                updatedState
-            );
+  
+  describe("User slice check", () => {
+    describe("Login async flow", () => {
+        beforeEach(() => {
+          localStorage.clear();
         });
-        it("should update the jwt", () => {
-            expect(
-                reducer(
-                    initialState,
-                    actions.update({
-                        jwt: mockUser.jwt
-                    }))
-                    ).toEqual({
-                        ...initialState,
-                        jwt: updatedState.jwt,
-        });
-                
-         });
-
-         it("should clear the state", () => {
-            const stateWithUpdatedValues = reducer(
-                initialState,
-                actions.update(updatedState)
-            );
-
-            expect(stateWithUpdatedValues).toEqual(updatedState);
-
-            expect(reducer(stateWithUpdatedValues, actions.clear())).toEqual({
-               initialState
-         });
-
-         });
-
-
-});
-
-describe("Login state flow", () => {
-    it("should set the request state to pending", () => {
-      expect(
-        reducer(
-          {
-            ...initialState,
-            error: {
-              message: "rejected",
-            },
-          },
-          login.pending(requestId, loginData)
-        )
-      ).toEqual({
-        ...initialState,
-        requestState: "pending",
-      });
-    });
-    it("should set the request state to fulfilled and reset any previous errors", () => {
-      expect(
-        reducer(
-          {
-            ...initialState,
-            error: {
-              message: "rejected",
-            },
-          },
-          login.fulfilled(
-            {
-              jwt: updatedState.jwt,
+        it("success login flow", async () => {
+            const store = storeCreator();
+            const stateBeforeLogin = store.getState();
+            expect(stateBeforeLogin).toEqual({
               user: {
-                username: updatedState.username,
-                email: updatedState.email,
+                ...initialState,
               },
-            },
-            requestId,
-            loginData
-          )
-        )
-      ).toEqual({
-        ...updatedState,
-        requestState: "fulfilled",
-      });
-    });
-    it("should set the request state to rejected", () => {
-      const payloadError = { error: { name: "500", message: "Server error" } };
-      expect(
-        reducer(
-          initialState,
-          login.rejected({} as Error, requestId, loginData, payloadError)
-        )
-      ).toEqual({
-        ...initialState,
-        error: payloadError.error,
-        requestState: "rejected",
-      });
-    });
-  });
+            });
+            await store.dispatch(login(loginData));
+            const stateAfterLogin = store.getState();
+            expect(stateAfterLogin).toEqual({
+              user: {
+                ...updatedState,
+                requestState: "fulfilled",
+              },
+            });
+            // Check that the data is stored in localStorage
+            expect(localStorage.getItem("jwt")).toBe(mockUser.jwt);
+            expect(localStorage.getItem("username")).toBe(mockUser.user.username);
+            expect(localStorage.getItem("email")).toBe(mockUser.user.email);
+          });
+          it("fail login flow", async () => {
+            const store = storeCreator();
+            await store.dispatch(login({ ...loginData, password: "wrongpass" }));
+            const state = store.getState();
+            expect(state).toEqual({
+                user: {
+                  ...initialState,
+                  requestState: "rejected",
+                  ...ValidationError,
+                },
+              });
+            });
+
+            it("login flow with saved jwt", async () => {
+                // Set the jwt in localStorage
+                localStorage.setItem("jwt", mockUser.jwt);
+          
+                const store = storeCreator();
+                // In this case the jwt is already saved in localStorage
+                await store.dispatch(login({}));
+                const state = store.getState();
+          
+                expect(state).toEqual({
+                  user: {
+                    ...updatedState,
+                    requestState: "fulfilled",
+                  },
+                });
+              });
 });
 
-// describe("Login state flow", () => {
-//     it("should set the request state to pending", () => {
-//         expect (
-//         reducer(
-//             {
-//                 ...initialState,
-//             error: {
-//                 message: "Rejected",
-//             }
-//         },
-//              login.pending(requestId, loginData))
-//         ).toEqual ({
-//             ...initialState,
-//             requestedState: "pending",
-//         });
-//     });
-
-//     it("should set the request state to fulfilled and reset any previous errors", () => {
-//         expect(
-//           reducer(
-//             {
-//               ...initialState,
-//               error: {
-//                 message: "Rejected",
-//               },
-//             },
-//             login.fulfilled(
-//               {
-//                 jwt: updatedState.jwt,
-//                 user: {
-//                   username: updatedState.username,
-//                   email: updatedState.email,
-//                 },
-//               },
-//               requestId,
-//               loginData
-//             )
-//           )
-//         ).toEqual({
-//           ...updatedState,
-//           requestState: "fulfilled",
-//         });
-//       });
-    
-//       it("should set the request state to rejected ", () => {
-//         const payloadError = { error: {name: "500", message: "Server Error"}};
-//         expect(
-//             reducer(
-//                 initialState,
-//                 login.rejected({} as Error, requestId,loginData, payloadError)
-//             )
-//         ).toEqual ({
-//             ...initialState,
-//             error: payloadError.error,
-//             requestState: "rejected",
-//         })
-//       })
-
-
-// });
-
-
-// });
-
-
-
-
+  });
+        

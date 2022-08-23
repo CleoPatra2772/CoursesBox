@@ -6,7 +6,7 @@ export type UserState ={
     jwt?: string;
     username?: string;
     email?: string;
-    requestedState?: RequestState;
+    requestState?: RequestState;
     error?: SerializedError;
 };
 
@@ -27,26 +27,26 @@ export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        update: (state, { payload }: PayloadAction<Partial<UserState>>) => ({
-            ...state,
-            ...payload,
-        }),
+    //   update: (state, { payload }: PayloadAction<Partial<UserState>>) => ({
+    //     ...state,
+    //     ...payload,
+    // }),
 
-        clear: () => initialState,
+    // clear: () => initialState,
     },
 
     extraReducers: (builder) => {
         builder.addCase(login.fulfilled, (state, {payload}) => {
-            state.requestedState = "fulfilled";
+            state.requestState = "fulfilled";
             state.jwt = payload.jwt;
             state.username = payload.user.username;
             state.email = payload.user.email;
             state.error = undefined;
         }).addCase(login.pending, (state) => {
-            state.requestedState = "pending";
+            state.requestState = "pending";
             state.error = undefined;
         }).addCase(login.rejected, (state, { payload }) => {
-            state.requestedState = "rejected";
+            state.requestState = "rejected";
             const payloadError = (payload as { error: SerializedError })?.error;
             
             state.error = payloadError;
