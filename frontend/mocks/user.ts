@@ -21,3 +21,13 @@ export const ValidationError = {
         details: {},
     }
 };
+
+export const RegistrationError = {
+
+    error: {
+        status: 400,
+        name: "ApplicationError",
+        message: "An Error occured during account creation",
+        details: {},
+    }
+}
