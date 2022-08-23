@@ -1,5 +1,5 @@
 import { reducer, initialState, login, logout, registration } from "./userSlice";
-import { storeCreator as globalStoreCreator } from "@/store";
+import { configureStore } from '@reduxjs/toolkit';
 import { mockUser, ValidationError, RegistrationError } from "@/mocks/user";
 
 
@@ -7,7 +7,7 @@ const rootReducer = {
     user: reducer,
 };
 
-const storeCreator = () => globalStoreCreator(rootReducer);
+const storeCreator = () => configureStore({ reducer: { user: reducer }});
 
 const updatedState = {
     jwt: mockUser.jwt,

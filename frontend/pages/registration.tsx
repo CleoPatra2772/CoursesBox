@@ -1,5 +1,12 @@
 import type { NextPage } from "next";
 import styled from "@emotion/styled";
+import Router, { useRouter } from "next/router";
+import { useSelector, useDispatch } from 'react-redux';
+
+import { RootState, AppDispatch } from "@/store";
+import { selectUser, 
+        registration,
+        RegistrationData} from '@/services/userSlice';
 import { useForm } from 'react-hook-form';
 import { CenteredTile } from "@/component/Tile";
 import { Input } from "@/component/Input";
@@ -13,25 +20,36 @@ const StyledInput = styled(Input)`
 margin-bottom: 1rem;
 `;
 
-export type RegistrationForm = {
-    username: string;
-    email: string;
-    password: string;
-};
+// export type RegistrationForm = {
+//     username: string;
+//     email: string;
+//     password: string;
+// };
 
 const Registration: NextPage = () => {
     const{
         register, 
         handleSubmit,
         formState: { errors },
-    } = useForm<RegistrationForm>();
+    } = useForm<RegistrationData>();
+    const router = useRouter();
 
-    const onSubmit = (data: RegistrationForm) => {
-        console.log(data);
+    const dispatch = useDispatch<AppDispatch>();
+    const { jwt, error } = useSelector<RootState, RootState["user"]>(selectUser);
+
+    if(Boolean(jwt) && !error){
+        router.push("/user");
+    }
+
+    const onSubmit = (data: RegistrationData) => {
+        dispatch(registration(data));
     }
     return (
     <form onSubmit = {handleSubmit(onSubmit)}>
-    <CenteredTile header="Create an account">{}
+    <CenteredTile header="Create an account">
+        <h3>
+            <ConditionalFeedback>{error?.message}</ConditionalFeedback>
+        </h3>
     <StyledInput 
     label='username' 
     placeholder="username"

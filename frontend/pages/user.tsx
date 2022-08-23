@@ -1,20 +1,39 @@
+import { useEffect } from "react";
 import type { NextPage } from "next";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from "@/store";
+import { selectUser, logout } from "@/services/userSlice";
 import { CenteredTile } from "@/component/Tile";
 import { Button } from "@/component/Button";
+import { useRouter } from "next/router";
 
 const User: NextPage= () => {
-   const userMock = { username: "Harry Potter", email: "harry@potter.com"};
+    const router = useRouter();
+    const { username, email, error } = useSelector<RootState, RootState["user"]>(
+        selectUser
+        );
+
+    const dispatch = useDispatch<AppDispatch>();
+    
+    useEffect(() => {
+        if(!username || Boolean(error)){
+            dispatch(logout());
+            router.push("/login");
+        }
+    }, []);
+
    const logoutHandler = async () => {
-    console.log("logout");
+        dispatch(logout());
+        router.push("/");
    };
 
     return (
-        <CenteredTile header="Profile">
-            <h3>username: {userMock.username}</h3>
-            <h3>email: {userMock.email}</h3>
+        username && email ? (<CenteredTile header="Profile">
+            <h3>username: {username}</h3>
+            <h3>email: {email}</h3>
             <Button onClick={logoutHandler}>Logout</Button>
-        </CenteredTile>
-    )
+        </CenteredTile>) : null
+    );
 };
 
 export default User;

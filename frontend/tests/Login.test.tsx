@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { render, screen, act } from "@/test-utils";
+import { pageRender as render, screen, act } from "@/test-utils";
 import Login from '../pages/login';
 
 describe("Login page", () => {
@@ -54,8 +54,10 @@ describe("Login page", () => {
       });
   
       const alerts = screen.getAllByRole("alert");
-  
+      
+      expect(alerts).toHaveLength(3);
       expect(alerts[0]).toMatchSnapshot();
       expect(alerts[1]).toMatchSnapshot();
+      expect(alerts[2]).toMatchSnapshot();
     });
 });

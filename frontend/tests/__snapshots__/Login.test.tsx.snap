@@ -13,6 +13,9 @@ exports[`Login page render check 1`] = `
           login
         </h2>
          
+        <h3>
+           
+        </h3>
         <label
           class="css-1xs7g1t"
           height="8"

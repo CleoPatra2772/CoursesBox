@@ -1,5 +1,8 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from "@/store";
+import { selectUser, login } from "@/services/userSlice";
 import styled from "@emotion/styled";
 import { useForm } from "react-hook-form";
 
@@ -8,6 +11,7 @@ import { Input} from "@/component/Input";
 import { ConditionalFeedback } from "@/component/Input/Feedback";
 import { Button } from "@/component/Button";
 import { StyledLink } from "@/component/StyledLink";
+import { useRouter } from "next/router";
 
 const StyledInput = styled(Input)`
 margin-bottom: 1rem;
@@ -21,15 +25,28 @@ export type LoginForm = {
 
 const Login: NextPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();
+    const router = useRouter();
 
+    const { jwt, error } = useSelector<RootState, RootState["user"]>(selectUser);
+    
 
-    const onSubmit = (data: LoginForm) => {
-        console.log(data);
+    const dispatch = useDispatch<AppDispatch>();
+
+    if(Boolean(jwt) && !error){
+        router.push("/user");
+    }
+
+    const onSubmit = async (data: LoginForm) => {
+        await dispatch(login(data));
     };
+    
     return (
    
     <form onSubmit={handleSubmit(onSubmit)}>
          <CenteredTile header="login">
+            <h3>
+                <ConditionalFeedback>{error?.message}</ConditionalFeedback>
+            </h3>
         <StyledInput 
         label="Identifier" 
         placeholder="username or email"
