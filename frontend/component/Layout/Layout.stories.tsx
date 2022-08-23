@@ -1,5 +1,6 @@
 import { ComponentStoryObj, ComponentMeta } from '@storybook/react';
-
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 import { expect } from '@storybook/jest';
 import { screen, userEvent } from '@storybook/testing-library';
 
@@ -27,5 +28,14 @@ export const BasicLayout: ComponentStoryObj<typeof Layout> = {
             </>
         ),
     },
+
+    decorators: [
+        (Story) => (
+            <Provider store={store}>
+                <Story />
+            </Provider>
+        )
+
+    ]
 };
 
