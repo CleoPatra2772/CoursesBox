@@ -1,6 +1,13 @@
 import userEvent from '@testing-library/user-event';
-import { pageRender as render, screen, act } from "@/test-utils";
+import { useRouter } from 'next/router';
+import { pageRender as render, screen, act, waitFor } from "@/test-utils";
 import Login from '../pages/login';
+import { mockUser } from '@/mocks/user';
+
+jest.mock("next/router", () => ({
+  ...jest.requireActual("next/router"),
+  useRouter: jest.fn(),
+}));
 
 describe("Login page", () => {
 
@@ -59,5 +66,55 @@ describe("Login page", () => {
       expect(alerts[0]).toMatchSnapshot();
       expect(alerts[1]).toMatchSnapshot();
       expect(alerts[2]).toMatchSnapshot();
+    });
+
+    it("Server validation check", async () => {
+      render(<Login />);
+    
+
+    const submitButton = screen.getByRole("button", { name: "Sign In"});
+
+    act(() => {
+      userEvent.type(
+        screen.getByRole("textbox", {name: "Identifier"}),
+        "test@test.test"
+      );
+      userEvent.type(
+        screen.getByRole("textbox", { name: "Password" }), 
+        "testpasswroddd!"
+      );
+      userEvent.click(submitButton);
+    });
+
+      expect(
+        await screen.findByTestId("Invalid identifier or password")
+      ).toBeInTheDocument();
+    });
+
+    it("Successful login check", async () => {
+      //Mock the router
+      const push = jest.fn();
+      (useRouter as jest.Mock).mockReturnValue({ push });
+
+      render(<Login />);
+
+      const submitButton = screen.getByRole("button", { name: "Sign In"});
+
+      act(() => {
+        userEvent.type(
+          screen.getByRole('testbox', { name : "identifier "}),
+          mockUser.user.email
+        );
+
+        userEvent.type(
+          screen.getByRole("textbox", { name: "Password"}),
+          mockUser.user.password
+        );
+
+        userEvent.click(submitButton);
+      });
+
+      //Check it the user is redirected to the user page
+      await waitFor(() => expect(push).toHaveBeenCalledWith('/user'));
     });
 });

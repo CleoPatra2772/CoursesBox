@@ -36,8 +36,8 @@ const Login: NextPage = () => {
         router.push("/user");
     }
 
-    const onSubmit = async (data: LoginForm) => {
-        await dispatch(login(data));
+    const onSubmit = (data: LoginForm) => {
+         dispatch(login(data));
     };
     
     return (

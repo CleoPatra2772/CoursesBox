@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { LoginData, RegistrationData } from '@/services/userSlice';
 import { mockUser, ValidationError, RegistrationError } from './user';
 
-const api_url = process.env.NEXT_PUBLIC_API_URL;
+const api_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
 export const handlers = [
         rest.post<LoginData>(`${api_url}/auth/local`, (req, res, ctx) => {

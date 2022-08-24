@@ -13,6 +13,9 @@ exports[`Registration page Render check 1`] = `
           Create an account
         </h2>
          
+        <h3>
+           
+        </h3>
         <label
           class="css-1l9k1rx"
           height="7"
