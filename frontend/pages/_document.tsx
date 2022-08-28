@@ -15,9 +15,9 @@ export default function Document() {
   var backgroundColor = isDark ? "#5e5c64" : "#e4ebf5";
   var textColor = isDark ? "#E4EBF5e6" : "#504e55e6";
 
-    document.documentElement.style.setProperty("--themeBackgroundColor", backgroundColor");
+    document.documentElement.style.setProperty("--themeBackgroundColor", backgroundColor);
     document.documentElement.style.setProperty("--themeColor", textColor);
-  }
+  
 `;
 
   return (
